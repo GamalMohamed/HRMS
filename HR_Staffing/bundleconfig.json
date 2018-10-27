@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "assets/pages/scripts/table-datatables-buttons.min.js",
+    "inputFiles": [
+      "assets/pages/scripts/table-datatables-buttons.js"
+    ]
+  }
+]

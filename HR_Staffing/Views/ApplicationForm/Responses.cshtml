@@ -1,0 +1,58 @@
+﻿@model IEnumerable<HR_Staffing.Models.FormResponse>
+@{
+    ViewBag.Title = "Applicants Responses";
+}
+
+<!-- BEGIN SAMPLE TABLE PORTLET-->
+@if (!Model.Any())
+{
+    <p>There is no responses yet.</p>
+}
+else
+{
+    <div class="portlet">
+        <div class="portlet-body">
+            <div class="table-scrollable">
+                <table class="table table-striped table-bordered table-advance table-hover">
+                    <thead>
+                        <tr>
+                            <th>Submisson Date</th>
+                            <th>Applicant Name</th>
+                            <th>Applicant Email</th>
+                            <th>Applicant Phone Number</th>
+                            <th>Response Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var formResponse in Model)
+                        {
+                            <tr @if (formResponse.Status!=HR_Staffing.Models.ApplicationFormResponseStatus.NotViewed) { @Html.Raw("class='viewed'")}}>
+                                <td>@formResponse.SubmissionDate</td>
+                                <td>@formResponse.ApplicantName</td>
+                                <td>@Html.DisplayFor(model => formResponse.ApplicantEmail)</td>
+                                <td>@formResponse.ApplicantPhoneNumber</td>
+                                <td>@formResponse.Status</td>
+                                <td>
+                                    <a href="@Url.Action("ApplicantResponse", new { applicantId = formResponse.ApplicantId })" class="btn dark btn-sm btn-outline sbold uppercase">
+                                        <i class="fa fa-share"></i> View
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> 
+}
+<!-- END SAMPLE TABLE PORTLET-->
+
+@section styles
+{
+    <style>
+        tr.viewed td {
+            background-color: lightyellow !important;
+        }
+    </style>
+}

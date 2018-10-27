@@ -1,0 +1,782 @@
+﻿@using System.Security.Claims
+@model CoEX_HRMS.Models.Employee
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Profile</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="Preview page of Metronic Admin Theme #1 for user account page" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="~/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    -----------------------------------------------------------------------------------------------------------------------
+    <link href="~/assets/global/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/assets/global/plugins/simple-line-icons/simple-line-icons.css" rel="stylesheet" />
+
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="~/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="~/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="~/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="~/assets/pages/css/profile.min.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <link href="~/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="~/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="~/favicon.ico" />
+</head>
+<!-- END HEAD -->
+<body class="page-header-fixed page-container-bg-solid page-content-white page-sidebar-closed">
+    <div class="page-wrapper">
+        <!-- BEGIN HEADER -->
+        <div class="page-header navbar navbar-fixed-top">
+            <!-- BEGIN HEADER INNER -->
+            <div class="page-header-inner ">
+                <!-- BEGIN LOGO -->
+                <div class="page-logo">
+                    <a href="/Dashboard">
+                        <img src="~/assets/layouts/layout/img/logo.png" alt="logo" class="logo-default" />
+                    </a>
+                </div>
+                <!-- END LOGO -->
+                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span></span>
+                </a>
+                <!-- END RESPONSIVE MENU TOGGLER -->
+                <!-- BEGIN TOP NAVIGATION MENU -->
+                <div class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <!-- BEGIN USER LOGIN DROPDOWN -->
+                        <li class="dropdown dropdown-user">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                @if (ViewBag.ProfilePic != null)
+                                {
+                                    <img alt="" class="img-circle" src="@ViewBag.ProfilePic" />
+                                }
+                                else
+                                {
+                                    <img alt="" class="img-circle" src="~/assets/layouts/layout/img/UserAvatar.jpg" />
+                                }
+                                <span class="username username-hide-on-mobile"> Howdy, @ClaimsPrincipal.Current.FindFirst(ClaimTypes.GivenName).Value </span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-default">
+                                <li>
+                                    <a onclick="location.href='@Url.Action("Index","Profile")'">
+                                        <i class="icon-user"></i> My Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="location.href = '@Url.Action("SignOutCallback", "Account")'">
+                                        <i class="icon-key"></i> Log Out
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- END USER LOGIN DROPDOWN -->
+                    </ul>
+                </div>
+                <!-- END TOP NAVIGATION MENU -->
+            </div>
+            <!-- END HEADER INNER -->
+        </div>
+        <!-- END HEADER INNER -->
+    </div>
+    <!-- END HEADER -->
+    <!-- BEGIN HEADER & CONTENT DIVIDER -->
+    <div class="clearfix"> </div>
+    <!-- END HEADER & CONTENT DIVIDER -->
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <!-- BEGIN CONTENT BODY -->
+            <div class="page-content">
+                <!-- BEGIN PAGE HEADER-->
+                <!-- BEGIN THEME PANEL -->
+                <div class="theme-panel hidden-xs hidden-sm">
+                    <div class="toggler"> </div>
+                    <div class="toggler-close"> </div>
+                    <div class="theme-options">
+                        <div class="theme-option theme-colors clearfix">
+                            <span> THEME COLOR </span>
+                            <ul>
+                                <li class="color-default current tooltips" data-style="default" data-container="body" data-original-title="Default"> </li>
+                                <li class="color-darkblue tooltips" data-style="darkblue" data-container="body" data-original-title="Dark Blue"> </li>
+                                <li class="color-blue tooltips" data-style="blue" data-container="body" data-original-title="Blue"> </li>
+                                <li class="color-grey tooltips" data-style="grey" data-container="body" data-original-title="Grey"> </li>
+                                <li class="color-light tooltips" data-style="light" data-container="body" data-original-title="Light"> </li>
+                                <li class="color-light2 tooltips" data-style="light2" data-container="body" data-html="true" data-original-title="Light 2"> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- END THEME PANEL -->
+                <!-- BEGIN PAGE TITLE-->
+                <h1 class="page-title">
+                    Welcome | Profile
+                </h1>
+                <!-- END PAGE TITLE-->
+                <!-- END PAGE HEADER-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- BEGIN PROFILE SIDEBAR -->
+                        <div class="profile-sidebar">
+                            <!-- PORTLET MAIN -->
+                            <div class="portlet light profile-sidebar-portlet ">
+                                <!-- SIDEBAR USERPIC -->
+                                <div class="profile-userpic">
+                                    <img src="@Model.Profile.ProfilePic" class="img-responsive" alt="">
+                                    <br />
+                                </div>
+                                <!-- END SIDEBAR USERPIC -->
+                                <!-- SIDEBAR USER TITLE -->
+                                <div class="profile-usertitle">
+                                    <div class="profile-usertitle-name"> @Html.DisplayFor(model => model.Name) </div>
+                                    <div class="profile-usertitle-job"> @Html.DisplayFor(model => model.Role.Title) </div>
+                                </div>
+                                <!-- END SIDEBAR USER TITLE -->
+                                <!-- SIDEBAR BUTTONS -->
+                                <!-- END SIDEBAR BUTTONS -->
+                                <!-- SIDEBAR MENU -->
+                                <div class="profile-usermenu">
+                                    <ul class="nav">
+                                        <li class="active">
+                                            <a>
+                                                <i class="icon-settings"></i> Overview
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- END MENU -->
+                            </div>
+                            <!-- END PORTLET MAIN -->
+                            <!-- PORTLET MAIN -->
+                            <div class="portlet light ">
+                                <!-- STAT -->
+                                <div>
+                                    <div class="margin-top-20 profile-desc-link">
+                                        <i class="fa fa-globe"></i>
+                                        @Html.DisplayFor(model => model.Email)
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END PORTLET MAIN -->
+                        </div>
+                        <!-- END BEGIN PROFILE SIDEBAR -->
+                        <!-- BEGIN PROFILE CONTENT -->
+                        <div class="profile-content">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="portlet light ">
+                                        <div class="portlet-title tabbable-line">
+                                            <div class="caption caption-md">
+                                                <i class="icon-globe theme-font hide"></i>
+                                                <span class="caption-subject font-blue-madison bold uppercase">Profile Account</span>
+                                            </div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active">
+                                                    <a href="#tab_1_1" data-toggle="tab">Personal Info</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#tab_1_2" data-toggle="tab">User Media</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div class="tab-content">
+                                                <!-- PERSONAL INFO TAB -->
+                                                <div class="tab-pane active" id="tab_1_1">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(e => e.Name, new { @class = "bold" })
+                                                        @Html.TextBoxFor(e => e.Name, new { @class = "form-control", @readonly = "readonly" })
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(e => e.PhoneNumber, new { @class = "bold" })
+                                                        @Html.TextBoxFor(e => e.PhoneNumber, new { @class = "form-control", @readonly = "readonly" })
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(e => e.HiringDate, new { @class = "bold" })
+                                                        @Html.TextBoxFor(e => e.HiringDate, "{0:d MMM yyyy}", new { @class = "form-control", @readonly = "readonly" })
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(e => e.Workload, new { @class = "bold" })
+                                                        @Html.TextBoxFor(e => e.Workload.Name, new { @class = "form-control", @readonly = "readonly" })
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(e => e.ReportingManager, new { @class = "bold" })
+                                                        @Html.TextBoxFor(e => e.ReportingManager, new { @class = "form-control", @readonly = "readonly" })
+                                                    </div>
+                                                    <br />
+                                                    <div class="form-group">
+                                                        @Html.Label("Uploaded Docs Checklist", new { @class = "bold" })
+                                                        <div class="mt-checkbox-list">
+                                                            <label class="mt-checkbox mt-checkbox-outline">
+                                                                Passport
+                                                                @{
+                                                                    if (@Model.Profile.PassportCheck())
+                                                                    {
+                                                                <input type="checkbox" name="test1" onclick="return false" checked />
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                <input type="checkbox" name="test1" onclick="return false" />
+                                                                    }
+
+                                                                }
+                                                                <span></span>
+                                                            </label>
+                                                            <label class="mt-checkbox mt-checkbox-outline">
+                                                                ID Card
+                                                                @{
+                                                                    if (Model.Profile.IdCardCheck())
+                                                                    {
+                                                                <input type="checkbox" value="ID card" onclick="return false" id="test2" checked>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                <input type="checkbox" value="ID card" onclick="return false" id="test2">
+                                                                    }
+                                                                }
+                                                                <span></span>
+                                                            </label>
+                                                            @if (@Model.Gender?.ToLower() != "female")
+                                                            {
+                                                            <label class="mt-checkbox mt-checkbox-outline">
+                                                                Military Certificate
+                                                                @{
+                                                                        if (Model.Profile.MilitaryCertificateCheck())
+                                                                        {
+                                                                <input type="checkbox" value="Miltery Certificate" onclick="return false" id="test4" checked>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                <input type="checkbox" value="Miltery Certificate" onclick="return false" id="test4">
+                                                                        }
+                                                                }
+                                                                <span></span>
+                                                            </label>
+                                                                        }
+                                                            <label class="mt-checkbox mt-checkbox-outline">
+                                                                Birth Certificate
+                                                                @{
+                                                                    if (Model.Profile.BirthCertificateCheck())
+                                                                    {
+                                                                <input type="checkbox" value="Birth Certificate" onclick="return false" id="test4" checked>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                <input type="checkbox" value="Birth Certificate" onclick="return false" id="test4">
+                                                                    }
+                                                                }
+                                                                <span></span>
+                                                            </label>
+                                                            <label class="mt-checkbox mt-checkbox-outline">
+                                                                Graduation Certificate
+                                                                @{
+                                                                    if (Model.Profile.GraduationCertificateCheck())
+                                                                    {
+                                                                <input type="checkbox" value="Graduation Certificate" onclick="return false" id="test5" checked>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                <input type="checkbox" value="Graduation Certificate" onclick="return false" id="test5">
+                                                                    }
+                                                                }
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- END PERSONAL INFO TAB -->
+                                                <!-- CHANGE AVATAR TAB -->
+                                                <div class="tab-pane" id="tab_1_2">
+                                                    <small>* Supported formats: JPG, JPEG, PNG, or PDF</small>
+                                                    @if (Model.Profile.GetExistingDocuments() != "")
+                                                    {
+                                                    <div class="col-md-offset-10">
+                                                        <button id="download-btn" data-files="@Model.Profile.GetExistingDocuments()" class="btn btn-primary">
+                                                            <i class="fa fa-download"></i> Download All
+                                                        </button>
+                                                    </div>
+                                                    }
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <h2 class="text">Profile Pic</h2>
+                                                            @using (Html.BeginForm("UploadImage", "Profile", FormMethod.Post,
+new
+{
+    enctype = "multipart/form-data",
+    @data_ajax = "false",
+    onsubmit = "return CheckFileType(document.getElementById('profilepicInput').value)"
+}))
+                                                            {
+                                                            <div class="form-group">
+                                                                <div data-provides="fileinput">
+                                                                    <div class="fileinput-preview thumbnail" style="width: 200px; height: 150px;">
+                                                                        @if (Model.Profile.GetFileExtension(Model.Profile.ProfilePic).ToLower() == ".pdf")
+                                                                            {
+                                                                        <img src="~/assets/global/img/pdf.png" alt="pdf" />
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                        <img src="@Model.Profile.ProfilePic" alt="" />
+                                                                            }
+                                                                    </div>
+                                                                    <br />
+                                                                    <div>
+                                                                        @if (ViewBag.Access == "FullAccess")
+                                                                            {
+                                                                        <span class="btn default btn-file">
+                                                                            <span class="fileinput-new"> Select /</span>
+                                                                            <span class="fileinput-exists"> Change </span>
+                                                                            <input type="file" name="file" id="profilepicInput">
+                                                                        </span>
+                                                                            }
+                                                                        @if (Model.Profile.ProfilePic != null)
+                                                                            {
+                                                                                if (ViewBag.Access == "FullAccess")
+                                                                                {
+                                                                        <a class="btn default fileinput-exists"
+                                                                           onclick="location.href = '@Url.Action("DeleteImage", "Profile", new {type = "ProfilePic", id = @Model.Profile.Employee.Id})'">Remove</a>
+                                                                                }
+                                                                        <a class="btn default fileinput-exists" href="@Model.Profile.ProfilePic" download> Download </a>
+                                                                            }
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                                if (ViewBag.Access == "FullAccess")
+                                                                 {
+                                                            <div class="margin-top-10">
+                                                                <input type="hidden" name="profileId" value="@Model.Profile.Id" />
+                                                                <input type="submit" value="SubmitProfilePic" name="upload" class="green btn" />
+                                                            </div>
+                                                                 }
+                                                            }
+
+                                                        </div>
+                                                    </div>
+
+                                                    <br />
+                                                    <br />
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <h2 class="text">ID Card</h2>
+                                                            @using (Html.BeginForm("UploadImage", "Profile", FormMethod.Post,
+                                                                new { enctype = "multipart/form-data", @data_ajax = "false", onsubmit = "return CheckFileType(document.getElementById('idCardInput').value)" }))
+                                                            {
+                                                            <div class="form-group">
+                                                                <div data-provides="fileinput">
+                                                                    <div class="fileinput-preview thumbnail" style="width: 200px; height: 150px;">
+                                                                        @if (Model.Profile.GetFileExtension(Model.Profile.IdCard).ToLower() == ".pdf")
+                                                                            {
+                                                                        <img src="~/assets/global/img/pdf.png" alt="pdf" />
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                        <img src="@Model.Profile.IdCard" alt="" />
+                                                                            }
+                                                                    </div>
+                                                                    <br />
+                                                                    <div>
+                                                                        @if (ViewBag.Access == "FullAccess")
+                                                                            {
+                                                                        <span class="btn default btn-file">
+                                                                            <span class="fileinput-new"> Select / </span>
+                                                                            <span class="fileinput-exists"> Change </span>
+                                                                            <input type="file" name="file" id="idCardInput">
+                                                                        </span>
+                                                                            }
+                                                                        @if (Model.Profile.IdCard != null)
+                                                                            {
+                                                                                if (ViewBag.Access == "FullAccess")
+                                                                                {
+                                                                        <a class="btn default fileinput-exists" onclick="location.href = '@Url.Action("DeleteImage", "Profile", new {type = "ID", id = @Model.Profile.Employee.Id})'"> Remove </a>
+                                                                                }
+                                                                        <a class="btn default fileinput-exists" href="@Model.Profile.IdCard" download> Download </a>
+                                                                            }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                                if (ViewBag.Access == "FullAccess")
+                                                                 {
+                                                            <div class="margin-top-10">
+                                                                <input type="hidden" name="profileId" value="@Model.Profile.Id" />
+                                                                <input type="submit" value="SubmitID" name="upload" class="green btn" />
+                                                            </div>
+                                                                 }
+                                                            }
+
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <h2 class="text"> Birth Certificate</h2>
+                                                            @using (Html.BeginForm("UploadImage", "Profile", FormMethod.Post,
+                    new { enctype = "multipart/form-data", @data_ajax = "false", onsubmit = "return CheckFileType(document.getElementById('birthCertificateInput').value)" }))
+                                                        {
+                                                            <div class="form-group">
+                                                                <div data-provides="fileinput">
+                                                                    <div class="fileinput-preview thumbnail" style="width: 200px; height: 150px;">
+                                                                        @if (Model.Profile.GetFileExtension(Model.Profile.BirthCertificate).ToLower() == ".pdf")
+                                                                        {
+                                                                        <img src="~/assets/global/img/pdf.png" alt="pdf" />
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                        <img src="@Model.Profile.BirthCertificate" alt="" />
+                                                                        }
+                                                                    </div>
+                                                                    <br />
+                                                                    <div>
+                                                                        @if (ViewBag.Access == "FullAccess")
+                                                                        {
+                                                                        <span class="btn default btn-file">
+                                                                            <span class="fileinput-new"> Select / </span>
+                                                                            <span class="fileinput-exists"> Change </span>
+                                                                            <input type="file" name="file" id="birthCertificateInput">
+                                                                        </span>
+                                                                        }
+                                                                        @if (Model.Profile.BirthCertificate != null)
+                                                                        {
+                                                                            if (ViewBag.Access == "FullAccess")
+                                                                            {
+                                                                        <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"
+                                                                           onclick="location.href = '@Url.Action("DeleteImage", "Profile",
+                                                                                                                 new {type = "BirthCertificate", id = @Model.Profile.Employee.Id})'">Remove</a>
+                                                                            }
+                                                                        <a class="btn default fileinput-exists" href="@Model.Profile.BirthCertificate" download> Download </a>
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            if (ViewBag.Access == "FullAccess")
+                                                            {
+                                                            <div class="margin-top-10">
+                                                                <input type="hidden" name="profileId" value="@Model.Profile.Id" />
+                                                                <input type="submit" value="SubmitCertificate" name="upload" class="green btn" />
+                                                            </div>
+                                                            }
+                                                        }
+                                                        </div>
+                                                    </div>
+
+                                                    <br />
+                                                    <br />
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <h2 class="text"> Passport</h2>
+                                                            @using (Html.BeginForm("uploadImage", "Profile", FormMethod.Post,
+                                                                new { enctype = "multipart/form-data", @data_ajax = "false", onsubmit = "return CheckFileType(document.getElementById('passportInput').value)" }))
+                                                            {
+                                                            <div class="form-group">
+                                                                <div data-provides="fileinput">
+                                                                    <div class="fileinput-preview thumbnail" style="width: 200px; height: 150px;">
+                                                                        @if (Model.Profile.GetFileExtension(Model.Profile.Passport).ToLower() == ".pdf")
+                                                                            {
+                                                                        <img src="~/assets/global/img/pdf.png" alt="pdf" />
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                        <img src="@Model.Profile.Passport" alt="" />
+                                                                            }
+                                                                    </div>
+                                                                    <br />
+                                                                    <div>
+                                                                        @if (ViewBag.Access == "FullAccess")
+                                                                            {
+                                                                        <span class="btn default btn-file">
+                                                                            <span class="fileinput-new"> Select / </span>
+                                                                            <span class="fileinput-exists"> Change </span>
+                                                                            <input type="file" name="file" id="passportInput">
+                                                                        </span>
+                                                                            }
+                                                                        @if (Model.Profile.Passport != null)
+                                                                            {
+                                                                                if (ViewBag.Access == "FullAccess")
+                                                                                {
+                                                                        <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"
+                                                                           onclick="location.href = '@Url.Action("DeleteImage", "Profile",
+                                                                                                                     new {type = "passport", id = @Model.Profile.Employee.Id})'">Remove</a>
+                                                                                }
+                                                                        <a class="btn default fileinput-exists" href="@Model.Profile.Passport" download> Download </a>
+                                                                            }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                                if (ViewBag.Access == "FullAccess")
+                                                                 {
+                                                            <div class="margin-top-10">
+                                                                <input type="hidden" name="profileId" value="@Model.Profile.Id" />
+                                                                <input type="submit" value="SubmitPassport" name="upload" class="green btn" />
+                                                            </div>
+                                                                 }
+                                                            }
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            @if (@Model.Gender?.ToLower() != "female")
+                                                            {
+                                                            <h2 class="text"> Military Certificate</h2>
+                                                                using (Html.BeginForm("UploadImage", "Profile", FormMethod.Post,
+                                                                    new { enctype = "multipart/form-data", @data_ajax = "false", onsubmit = "return CheckFileType(document.getElementById('militaryCertificateInput').value)" }))
+                                                                {
+                                                            <div class="form-group">
+                                                                <div data-provides="fileinput">
+                                                                    <div class="fileinput-preview thumbnail" style="width: 200px; height: 150px;">
+                                                                        @if (Model.Profile.GetFileExtension(Model.Profile.MilitaryCertificate).ToLower() == ".pdf")
+                                                                                {
+                                                                        <img src="~/assets/global/img/pdf.png" alt="pdf" />
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                        <img src="@Model.Profile.MilitaryCertificate" alt="" />
+                                                                                }
+                                                                    </div>
+                                                                    <br />
+                                                                    <div>
+                                                                        @if (ViewBag.Access == "FullAccess")
+                                                                                {
+                                                                        <span class="btn default btn-file">
+                                                                            <span class="fileinput-new"> Select / </span>
+                                                                            <span class="fileinput-exists"> Change </span>
+                                                                            <input type="file" name="file" id="militaryCertificateInput">
+                                                                        </span>
+                                                                                }
+                                                                        @if (Model.Profile.MilitaryCertificate != null)
+                                                                                {
+                                                                                    if (ViewBag.Access == "FullAccess")
+                                                                                    {
+                                                                        <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"
+                                                                           onclick="location.href = '@Url.Action("DeleteImage", "Profile",
+                                                                                                                         new {type = "MilitaryCertificate", id = @Model.Profile.Employee.Id})'">Remove</a>
+                                                                                    }
+                                                                        <a class="btn default fileinput-exists" href="@Model.Profile.MilitaryCertificate" download> Download </a>
+                                                                                }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                                    if (ViewBag.Access == "FullAccess")
+                                                                    {
+                                                            <div class="margin-top-10">
+                                                                <input type="hidden" name="profileId" value="@Model.Profile.Id" />
+                                                                <input type="submit" value="SubmitMilitary" name="upload" class="green btn" />
+                                                            </div>
+                                                                    }
+                                                                }
+                                                            }
+                                                        </div>
+
+                                                    </div>
+
+                                                    <br />
+                                                    <br />
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <h2 class="text">Graduation Certificate</h2>
+                                                            @using (Html.BeginForm("UploadImage", "Profile", FormMethod.Post,
+                                                                new { enctype = "multipart/form-data", @data_ajax = "false", onsubmit = "return CheckFileType(document.getElementById('graduationCertificateInput').value)" }))
+                                                            {
+                                                            <div class="form-group">
+                                                                <div data-provides="fileinput">
+                                                                    <div class="fileinput-preview thumbnail" style="width: 200px; height: 150px;">
+                                                                        @if (Model.Profile.GetFileExtension(Model.Profile.GraduationCertificate).ToLower() == ".pdf")
+                                                                            {
+                                                                        <img src="~/assets/global/img/pdf.png" alt="pdf" />
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                        <img src="@Model.Profile.GraduationCertificate" alt="" />
+                                                                            }
+                                                                    </div>
+                                                                    <br />
+                                                                    <div>
+                                                                        @if (ViewBag.Access == "FullAccess")
+                                                                            {
+                                                                        <span class="btn default btn-file">
+                                                                            <span class="fileinput-new"> Select / </span>
+                                                                            <span class="fileinput-exists"> Change </span>
+                                                                            <input type="file" name="file" id="graduationCertificateInput">
+                                                                        </span>
+                                                                            }
+                                                                        @if (Model.Profile.GraduationCertificate != null)
+                                                                            {
+                                                                                if (ViewBag.Access == "FullAccess")
+                                                                                 {
+                                                                        <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"
+                                                                           onclick="location.href = '@Url.Action("DeleteImage", "Profile",
+                                                                                                                      new {type = "GraduationCertificate", id = @Model.Profile.Employee.Id})'">
+                                                                            Remove
+                                                                        </a>
+                                                                                 }
+                                                                        <a class="btn default fileinput-exists" href="@Model.Profile.GraduationCertificate" download> Download </a>
+                                                                            }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                                if (ViewBag.Access == "FullAccess")
+                                                                 {
+                                                            <div class="margin-top-10">
+                                                                <input type="hidden" name="profileId" value="@Model.Profile.Id" />
+                                                                <input type="submit" value="SubmitGraduation" name="upload" class="green btn" />
+                                                            </div>
+                                                                 }
+                                                            }
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <h2 class="text">Extra Document</h2>
+                                                            @using (Html.BeginForm("UploadImage", "Profile", FormMethod.Post,
+        new { enctype = "multipart/form-data", @data_ajax = "false", onsubmit = "return CheckFileType(document.getElementById('extraDocumentInput').value)" }))
+                                                            {
+                                                            <div class="form-group">
+                                                                <div data-provides="fileinput">
+                                                                    <div class="fileinput-preview thumbnail" style="width: 200px; height: 150px;">
+                                                                        @if (Model.Profile.GetFileExtension(Model.Profile.ExtraDocument).ToLower() == ".pdf")
+                                                                            {
+                                                                        <img src="~/assets/global/img/pdf.png" alt="pdf" />
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                        <img src="@Model.Profile.ExtraDocument" alt="" />
+                                                                            }
+                                                                    </div>
+                                                                    <br />
+                                                                    <div>
+                                                                        @if (ViewBag.Access == "FullAccess")
+                                                                            {
+                                                                        <span class="btn default btn-file">
+                                                                            <span class="fileinput-new"> Select / </span>
+                                                                            <span class="fileinput-exists"> Change </span>
+                                                                            <input type="file" name="file" id="extraDocumentInput">
+                                                                        </span>
+                                                                            }
+                                                                        @if (Model.Profile.ExtraDocument != null)
+                                                                            {
+                                                                                if (ViewBag.Access == "FullAccess")
+                                                                                {
+                                                                        <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"
+                                                                           onclick="location.href = '@Url.Action("DeleteImage", "Profile", new {type = "extraDoc", id = @Model.Profile.Employee.Id})'">Remove</a>
+                                                                        <a class="btn default fileinput-exists" href="@Model.Profile.ExtraDocument" download> Download </a>
+                                                                                }
+                                                                            }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                                if (ViewBag.Access == "FullAccess")
+                                                                 {
+                                                            <div class="margin-top-10">
+                                                                <input type="hidden" name="profileId" value="@Model.Profile.Id" />
+                                                                <input type="submit" value="SubmitExtraDoc" name="upload" class="green btn" />
+                                                            </div>
+                                                                 }
+                                                            }
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- END CHANGE AVATAR TAB -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END PROFILE CONTENT -->
+                    </div>
+                </div>
+            </div>
+            <!-- END CONTENT BODY -->
+        </div>
+        <!-- END CONTENT -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    <div class="page-footer">
+        <div class="page-footer-inner">
+            @DateTime.Now.Year &copy;
+            <a target="_blank" href="http://microsoft.com">Human Resourses</a>
+        </div>
+        <div class="scroll-to-top">
+            <i class="icon-arrow-up"></i>
+        </div>
+    </div>
+    <!-- END FOOTER ->
+    <!--[if lt IE 9]>
+    <script src="~/assets/global/plugins/respond.min.js"></script>
+    <script src="~/assets/global/plugins/excanvas.min.js"></script>
+    <script src="~/assets/global/plugins/ie8.fix.min.js"></script>
+    <![endif]-->
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="~/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="~/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script src="~/assets/global/scripts/app.min.js" type="text/javascript"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="~/assets/pages/scripts/profile.min.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    <script src="~/assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
+    <script src="~/assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
+    <script src="~/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+    <script src="~/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/multi-download/browser.js"></script>
+    <!-- END THEME LAYOUT SCRIPTS -->
+
+    <script type="text/javascript">
+
+        document.querySelector('#download-btn').addEventListener('click', function (e) {
+            var files = e.target.dataset.files.split(' ');
+            multiDownload(files);
+        });
+
+        function CheckFileType(fileName) {
+            if (fileName === "") {
+                alert("Browse to upload a valid File with supported extension");
+                return false;
+            }
+            var ext;
+            if (window.navigator.userAgent.indexOf("Edge") > -1) {
+                ext = fileName.split(".")[2].toLowerCase();
+            } else {
+                ext = fileName.split(".")[1].toLowerCase();
+            }
+            if (ext === "jpg" || ext === "jpeg" || ext === "png" || ext === "pdf")
+                return true;
+            else {
+                alert("File with " + fileName.split(".")[1].toUpperCase() + " format is invalid. Upload a valid file with one of the supported extensions");
+                return false;
+            }
+        }
+    </script>
+
+</body>
+</html>

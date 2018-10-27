@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+<!--HR TOOLBOX-->
+<div class="row">
+    <div class="col-md-12 ">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>
+                    <span class="caption-subject bold font-grey-gallery uppercase">HR Toolbox</span>
+                </div>
+                <div class="tools">
+                    <a href="" class="collapse" data-original-title="" title=""> </a>
+                    <a href="" class="fullscreen" data-original-title="" title=""> </a>
+                    <a href="" class="remove" data-original-title="" title=""> </a>
+                </div>
+            </div>
+            <div class="portlet-body" style="display: block;">
+                <div class="tiles">
+                    <a href="/Applicants/New" class="nav-link ">
+                        <div class="tile bg-blue">
+                            <div class="tile-body">
+                                <i class="fa fa-plus-circle"></i>
+                            </div>
+                            <div class="tile-object">
+                                <div class="name">  New Applicant </div>
+                                <div class="number"> </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a onclick="window.open('@Url.Action("Index","ApplicationForm")', '_blank')" class="nav-link ">
+                        <div class="tile bg-green-haze">
+                            <div class="tile-body">
+                                <i class="fa fa-file-text-o "></i>
+                            </div>
+                            <div class="tile-object">
+                                <div class="name">Application Form </div>
+                                <div class="number"> </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="/ApplicationForm/Questions" class="nav-link ">
+                        <div class="tile bg-red-flamingo">
+                            <div class="tile-body">
+                                <i class="fa fa-pencil-square-o"></i>
+                            </div>
+                            <div class="tile-object">
+                                <div class="name"> Edit Application Form </div>
+                                <div class="number"> </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="/ApplicationForm/Responses" class="nav-link ">
+                        <div class="tile bg-yellow-haze">
+                            <div class="tile-body">
+                                <i class="fa fa-archive"></i>
+                            </div>
+                            <div class="tile-object">
+                                <div class="name"> Applicants Responses </div>
+                                <div class="number"> </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="/PhoneInterview/Questions" class="nav-link ">
+                        <div class="tile bg-purple-sharp">
+                            <div class="tile-body">
+                                <i class="fa fa-pencil-square-o"></i>
+                            </div>
+                            <div class="tile-object">
+                                <div class="name"> Edit Phone Interivew </div>
+                                <div class="number"> </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="/PhoneInterview/Responses" class="nav-link ">
+                        <div class="tile bg-purple-sharp">
+                            <div class="tile-body">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="tile-object">
+                                <div class="name"> Phone Interivews list </div>
+                                <div class="number"> </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="/Interviews" class="nav-link ">
+                        <div class="tile bg-grey-silver">
+                            <div class="tile-body">
+                                <i class="fa fa-users"></i>
+                            </div>
+                            <div class="tile-object">
+                                <div class="name"> Interviews list </div>
+                                <div class="number"> </div>
+                            </div>
+                        </div>
+                    </a> 
+                    <a href="/FeedbackForm/Questions" class="nav-link ">
+                        <div class="tile bg-green-sharp">
+                            <div class="tile-body">
+                                <i class="fa fa-pencil-square-o"></i>
+                            </div>
+                            <div class="tile-object">
+                                <div class="name"> Edit Feedback form </div>
+                                <div class="number"> </div>
+                            </div>
+                        </div>
+                    </a> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr/>
+
+<!--POWER BI INSIGHTS-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bar-chart font-blue-sharp"></i>
+                    <span class="caption-subject font-blue-sharp bold uppercase">Power BI Insights</span>
+                </div>
+                <div style="margin: auto; padding: 20px;">
+                    <hr />
+                    <iframe id="embeddedIframe" width="933" height="700"
+                            src="https://app.powerbi.com/view?r=eyJrIjoiOWRkNGVmNDQtMGUzNC00YTE1LThmZjUtMmU4NzU5ZWJkOTc2IiwidCI6ImM3OTQ2N2I4LWI5Y2YtNGIzYS05ZmJhLTAwOWE1MmQ1NDRiYiIsImMiOjF9"
+                            frameborder="0" allowFullScreen="true"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            // HACK: Delay apperance of Iframe till load event finishes!
+            window.onload = function () {
+
+                $("#embeddedIframe").hide();
+
+                var delayMillis = 2000; // 3 seconds
+
+                setTimeout(function () {
+                    $("#embeddedIframe").show();
+                }, delayMillis);
+            }
+        });
+
+
+</script>
+}

@@ -1,0 +1,319 @@
+﻿@model CoEX_HRMS.ViewModels.NotificationViewModel
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+@if (ViewBag.Access == "FullAccess" || ViewBag.Access == "FullView")
+{
+    <!--Quick Actions-->
+    <div class="row">
+        <div class="portlet light">
+            <div class="portlet-title tabbable-line">
+                <div class="tools">
+                    <a href="" class="collapse" data-original-title="" title=""> </a>
+                    <a href="" class="fullscreen" data-original-title="" title=""> </a>
+                    <a href="" class="remove" data-original-title="" title=""> </a>
+                </div>
+                <div class="caption">
+                    <i class="icon-pin font-yellow-crusta"></i>
+                    <span class="caption-subject bold font-yellow-crusta uppercase"> Quick Actions</span>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li>
+                        <a href="#portlet_tab3" data-toggle="tab"> Missing Items </a>
+                    </li>
+                    <li>
+                        <a href="#portlet_tab2" data-toggle="tab"> Upcoming Resignation </a>
+                    </li>
+                    <li class="active">
+                        <a href="#portlet_tab1" data-toggle="tab"> Upcoming Hiring </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="portlet-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="portlet_tab1">
+                        <div class="slimScrollDiv" style="width: auto; height: auto; overflow: hidden; position: relative;">
+                            <div class="scroller" style="width: auto; height: auto; overflow: hidden;" data-initialized="1">
+                                <h4> Upcoming Hiring </h4>
+                                <br />
+                                @if (!Model.HiringEmployees.Any())
+                                {
+                                    <p>No Upcoming hires..</p>
+                                }
+                                else
+                                {
+                                    <table id="HiringEmployees" class="table table-bordered table-hover table-scrollable">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <i class="fa fa-user"></i>
+                                                    Name
+                                                </th>
+                                                <th>
+                                                    <i class="fa fa-calendar-o"></i>
+                                                    Hiring Date
+                                                </th>
+                                                <th>
+                                                    <i class="fa fa-user-times"></i>
+                                                    Remaining Days
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var employee in Model.HiringEmployees)
+                                            {
+                                                <tr>
+                                                    <td> @Html.ActionLink(employee.Name, "Details", "Profile", new { Id = employee.Id }, null)</td>
+                                                    <td>
+                                                        @if (employee.HiringDate != null)
+                                                        {
+                                                            @employee.HiringDate.Value.ToLongDateString()
+                                                        }
+                                                    </td>
+
+                                                    <td>
+                                                        @if (employee.HiringDate != null)
+                                                        {
+                                                            @(employee.HiringDate.Value.Day - DateTime.Now.Day)
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                }
+                            </div>
+                            <div class="slimScrollBar" style="background: rgb(187, 187, 187); border-radius: 7px; top: 12px; width: 7px; height: 166.66px; right: 1px; display: none; position: absolute; z-index: 99; opacity: 0.4;"></div><div class="slimScrollRail" style="background: rgb(234, 234, 234); border-radius: 7px; top: 0px; width: 7px; height: 100%; right: 1px; display: none; position: absolute; z-index: 90; opacity: 0.2;"></div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="portlet_tab2">
+                        <div class="slimScrollDiv" style="width: auto; height: auto; overflow: hidden; position: relative;">
+                            <div class="scroller" style="width: auto; height: auto; overflow: hidden;" data-initialized="1">
+                                <h4>Upcoming Resignation</h4>
+                                <br />
+                                @if (!Model.ResignedEmployees.Any())
+                                {
+                                    <p>No Upcoming Resigns..</p>
+                                }
+                                else
+                                {
+                                    <table id="ResignedEmployees" class="table table-bordered table-hover table-scrollable">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <i class="fa fa-user"></i>
+                                                    Name
+                                                </th>
+                                                <th>
+                                                    <i class="fa fa-calendar-o"></i>
+                                                    Resignation Date
+                                                </th>
+                                                <th>
+                                                    <i class="fa fa-user-times"></i>
+                                                    Remaining Days
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var employee in Model.ResignedEmployees)
+                                            {
+                                                <tr>
+                                                    <td> @Html.ActionLink(employee.Name, "Details", "Profile", new { Id = employee.Id }, null)</td>
+                                                    <td>
+                                                        @if (employee.ResignationDate != null)
+                                                        {
+                                                            @employee.ResignationDate.Value.ToLongDateString()
+                                                        }
+                                                    </td>
+
+                                                    <td>
+                                                        @if (employee.ResignationDate != null)
+                                                        {
+                                                            @(employee.ResignationDate.Value.Day - DateTime.Now.Day)
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                }
+                                
+                            </div>
+                            <div class="slimScrollBar" style="background: rgb(187, 187, 187); border-radius: 7px; top: 0px; width: 7px; right: 1px; display: block; position: absolute; z-index: 99; opacity: 0.4;"></div><div class="slimScrollRail" style="background: rgb(234, 234, 234); border-radius: 7px; top: 0px; width: 7px; height: 100%; right: 1px; display: none; position: absolute; z-index: 90; opacity: 0.2;"></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="portlet_tab3">
+                        <div class="slimScrollDiv" style="width: auto; height: auto; overflow: hidden; position: relative;">
+                            <div class="scroller" style="width: auto; height: auto; overflow: hidden;" data-initialized="1">
+                                <h4>Missing Items</h4>
+                                <br />
+                                @if (!Model.UncompletedProfiles.Any())
+                                {
+                                    <p>No Missing items..</p>
+                                }
+                                else
+                                {
+                                    <table id="MissingItems" class="table table-bordered table-hover table-scrollable">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <i class="fa fa-user"></i>
+                                                    Name
+                                                </th>
+                                                <th>
+                                                    <i class="fa fa-mail-forward"></i>
+                                                    Email
+                                                </th>
+                                                <th>
+                                                    <i class="fa fa-file-image-o"></i>
+                                                    Missing Items
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var profile in Model.UncompletedProfiles)
+                                            {
+                                                <tr>
+                                                    <td> @Html.ActionLink(profile.Employee.Name, "Details", "Profile", new { Id = profile.Employee.Id }, null)</td>
+                                                    <td> @Html.DisplayFor(model => profile.Employee.Email)</td>
+                                                    <td>@profile.MissedItems()</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                }
+                                
+
+                                <div class="slimScrollBar" style="background: rgb(187, 187, 187); border-radius: 7px; top: 0px; width: 7px; right: 1px; display: block; position: absolute; z-index: 99; opacity: 0.4;"></div><div class="slimScrollRail" style="background: rgb(234, 234, 234); border-radius: 7px; top: 0px; width: 7px; height: 100%; right: 1px; display: none; position: absolute; z-index: 90; opacity: 0.2;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<hr/>
+
+@if (ViewBag.Access == "FullAccess")
+{
+    <!--HR TOOLBOX-->
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-cogs"></i>
+                        <span class="caption-subject bold font-grey-gallery uppercase">HR Toolbox</span>
+                    </div>
+                    <div class="tools">
+                        <a href="" class="collapse" data-original-title="" title=""> </a>
+                        <a href="" class="fullscreen" data-original-title="" title=""> </a>
+                        <a href="" class="remove" data-original-title="" title=""> </a>
+                    </div>
+                </div>
+                <div class="portlet-body" style="display: block;">
+                    <div class="tiles">
+                        <a href="/Employees/Create" class="nav-link ">
+                            <div class="tile bg-blue">
+                                <div class="tile-body">
+                                    <i class="fa fa-plus-circle"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">  New Employee </div>
+                                    <div class="number"> </div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="/Workloads/Create" class="nav-link ">
+                            <div class="tile bg-red-haze">
+                                <div class="tile-body">
+                                    <i class="fa fa-plus-circle"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">  New Workload </div>
+                                    <div class="number"> </div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="/Roles/Create" class="nav-link ">
+                            <div class="tile bg-green-haze">
+                                <div class="tile-body">
+                                    <i class="fa fa-plus-circle"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">  New Role </div>
+                                    <div class="number"> </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+}
+
+<!--POWER BI INSIGHTS-->
+<div class="row">
+    <div class="col-md-12">
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-bar-chart font-blue-sharp"></i>
+                <span class="caption-subject font-blue-sharp bold uppercase">Power BI Insights</span>
+            </div>
+            <div style="margin: auto; padding: 20px;">
+                <hr />
+                <iframe id="embeddedIframe" width="933" height="700" 
+                        src="https://app.powerbi.com/view?r=eyJrIjoiOGRjMTY5NGEtYWI4NS00ZWNhLThmZTgtNjJmZmQyMzIxZjhlIiwidCI6ImM3OTQ2N2I4LWI5Y2YtNGIzYS05ZmJhLTAwOWE1MmQ1NDRiYiIsImMiOjF9" 
+                        frameborder="0" allowFullScreen="true"></iframe>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-1.12.4.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js " type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('table').DataTable();
+
+            // HACK: Delay apperance of Iframe till load event finishes!
+            window.onload = function () {
+
+                $("#embeddedIframe").hide();
+
+                var delayMillis = 2000; // 3 seconds
+
+                setTimeout(function () {
+                    $("#embeddedIframe").show();
+                }, delayMillis);
+            }
+        });
+
+
+    </script>
+
+
+
+}
+
+@section styles
+{
+    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+}
+
+

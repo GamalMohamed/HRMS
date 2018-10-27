@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "assets/pages/scripts/table-datatables-buttons.min.js",
+    "inputFiles": [
+      "assets/pages/scripts/table-datatables-buttons.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/jquery.AreYouSurr/jquery.are-you-sure.min.js",
+    "inputFiles": [
+      "Scripts/jquery.AreYouSurr/jquery.are-you-sure.js"
+    ]
+  }
+]

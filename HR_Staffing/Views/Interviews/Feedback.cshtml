@@ -1,0 +1,80 @@
+﻿@model HR_Staffing.ViewModels.FeedbackFormViewModel
+@{
+    ViewBag.Title = "New Feedback";
+}
+
+<div class="portlet light bordered">
+    @using (Html.BeginForm("SaveFeedback", "Interviews"))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(m => m.Feedback.InterviewId, new { Value = Model.Feedback.InterviewId })
+        @Html.HiddenFor(m => m.Feedback.Interview.ApplicantId, new { Value = Model.Feedback.Interview.ApplicantId })
+        @Html.HiddenFor(m => m.Feedback.Interview.InterviewType, new { Value = Model.Feedback.Interview.InterviewType })
+
+        <div class="form-group">
+            <strong>Applicant Name:</strong>
+            @Html.DisplayFor(m => m.Feedback.Interview.Applicant.Name)
+        </div>
+
+        <div class="form-group">
+            <strong>Interview Type:</strong>
+            @Html.DisplayFor(m => m.Feedback.Interview.InterviewType)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Feedback.Interviewer, htmlAttributes: new { @class = "control-label bold" })
+            @Html.TextBoxFor(m => m.Feedback.Interviewer, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Feedback.Interviewer, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Feedback.InterviewerAlias, htmlAttributes: new { @class = "control-label bold" })
+            @Html.TextBoxFor(m => m.Feedback.InterviewerAlias, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Feedback.InterviewerAlias, "", new { @class = "text-danger" })
+        </div>
+
+        int i = 0;
+        foreach (var formQuestion in Model.FormQuestions)
+        {
+            {
+                Model.Feedback.FeedbackContents.Add(new HR_Staffing.Models.FeedbackContent());
+            }
+            <div class="form-group">
+                @Html.Label(@formQuestion.Title, htmlAttributes: new { @class = "control-label bold" })<br />
+                <small>@formQuestion.Description</small>
+                @Html.TextAreaFor(m => m.Feedback.FeedbackContents[i].QuestionAnswer, new { @class = "form-control", @style = "width: 80%; max-width: 100%;" })
+            </div>
+            @Html.HiddenFor(m => m.Feedback.FeedbackContents[i].InterviewId, new { Value = Model.Feedback.InterviewId })
+            @Html.HiddenFor(m => m.Feedback.FeedbackContents[i].Title, new { Value = @formQuestion.Title })
+            @Html.HiddenFor(m => m.Feedback.FeedbackContents[i].Description, new { Value = @formQuestion.Description })
+            i++;
+        }
+
+        {
+            List<SelectListItem> hiredSelectList = new List<SelectListItem>();
+            hiredSelectList.Add(new SelectListItem
+            {
+                Text = "Passed",
+                Value = "True"
+            });
+            hiredSelectList.Add(new SelectListItem
+            {
+                Text = "Not Passed",
+                Value = "False",
+                Selected = true
+            });
+            <br/>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Feedback.Hired, htmlAttributes: new { @class = "control-label bold" })
+                @Html.DropDownListFor(m => m.Feedback.Hired, hiredSelectList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Feedback.Hired)
+            </div>
+        }
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

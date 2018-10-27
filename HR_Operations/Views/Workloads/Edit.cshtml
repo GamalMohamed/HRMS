@@ -1,0 +1,70 @@
+﻿@model CoEX_HRMS.Models.Workload
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h1 class="page-title">
+    <i class="fa fa-edit"></i>
+    Edit
+    <small>Workloads</small>
+</h1>
+
+<div class="portlet-body form">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2 bold" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-10 col-md-10">
+                    <button type="submit" value="Edit" class="btn btn-primary mt-ladda-btn ladda-button" data-style="expand-right">
+                        <i class="fa fa-edit"></i>
+                        <span class="ladda-label">Edit</span>
+                        <span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section styles{
+    <link href="~/assets/global/plugins/ladda/ladda-themeless.min.css" rel="stylesheet" type="text/css" />
+}
+@section plugins{
+    @Scripts.Render("~/bundles/spinner-button-plugins")
+}
+@section scripts{
+    <script src="~/assets/pages/scripts/ui-buttons-spinners.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.AreYouSurr/jquery.are-you-sure.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#frm').areYouSure(
+                {
+                    message: 'It looks like you have been editing something. '
+                    + 'If you leave before saving, your changes will be lost.'
+                }
+            );
+        });
+
+    </script>
+
+}
+

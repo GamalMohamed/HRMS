@@ -1,0 +1,247 @@
+﻿@using HR_Staffing.Models
+@model Applicant
+
+@{
+    ViewBag.Title = "Applicant Details";
+}
+
+<h1 class="page-title">
+    <i class="fa fa-info"></i>
+    Details
+</h1>
+
+<div class="portlet-body">
+    <div class="row">
+        <div class="col-md-12">
+            <table id="user" class="table table-bordered table-striped">
+                <tbody>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Name)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Role)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Status)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.HiringManager, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.HiringManager)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.Passcode, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Passcode)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Comments)
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+<p>
+    @if (ViewBag.Staffing)
+    {
+        <a href="@Url.Action("Edit", "Applicants", new {id = Model.Id}, null)" class="btn btn-outline btn-circle green btn-sm purple">
+            <i class="fa fa-edit"></i> Edit
+        </a>
+    }
+    <a href="@Url.Action("Index")" class="btn btn-primary">
+        Back to List
+    </a>
+</p>
+
+<hr/>
+
+<div class="portlet light portlet-fit bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-directions font-green hide"></i>
+            <span class="caption-subject bold font-dark uppercase"> Applicant Timeline</span>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="cd-horizontal-timeline mt-timeline-horizontal" data-spacing="100">
+            <div class="timeline mt-timeline-square">
+                <div class="events-wrapper">
+                    <div class="events">
+                        <ol>
+                            <li>
+                                <a href="#0" data-date="16/01/2014" class="border-after-@(Model.PhoneInterview != null ? Html.Raw("blue") : Html.Raw("red")) bg-after-@(Model.PhoneInterview != null ? Html.Raw("blue") : Html.Raw("red")) selected" @if(Model.FormResponse == null){ @Html.Raw("style='pointer-events: none;'") }>Application Form</a>
+                            </li>
+                            <li>
+                                <a href="#0" data-date="12/03/2014" class="border-after-@(Model.PhoneInterview != null ? Html.Raw("blue") : Html.Raw("red")) bg-after-@(Model.PhoneInterview != null ? Html.Raw("blue") : Html.Raw("red"))" @if(Model.PhoneInterview == null){ @Html.Raw("style='pointer-events: none;'") }>Phone Interview</a>
+                            </li>
+
+                            @{
+                                var hrInterview = Model.Interviews.FirstOrDefault(m => m.InterviewType == InterviewType.HR);
+                                var technicalInterview = Model.Interviews.FirstOrDefault(m => m.InterviewType == InterviewType.Technical);
+                                var hiringManagerInterview = Model.Interviews.FirstOrDefault(m => m.InterviewType == InterviewType.HiringManager);
+                            }
+
+                            <li>
+                                <a href="#0" data-date="27/04/2014" class="border-after-@(hrInterview != null ? Html.Raw("blue") : Html.Raw("red")) bg-after-@(hrInterview != null ? Html.Raw("blue") : Html.Raw("red"))" @if(hrInterview == null){ @Html.Raw("style='pointer-events: none;'") }>HR Interview</a>
+                            </li>
+                            <li>
+                                <a href="#0" data-date="20/05/2014" class="border-after-@(technicalInterview != null ? Html.Raw("blue") : Html.Raw("red")) bg-after-@(technicalInterview != null ? Html.Raw("blue") : Html.Raw("red"))" @if(technicalInterview == null){ @Html.Raw("style='pointer-events: none;'") }>Technical Interview</a>
+                            </li>
+                            <li>
+                                <a href="#0" data-date="01/07/2014" class="border-after-@(hiringManagerInterview != null ? Html.Raw("blue") : Html.Raw("red")) bg-after-@(hiringManagerInterview != null ? Html.Raw("blue") : Html.Raw("red"))" @if(hiringManagerInterview == null){ @Html.Raw("style='pointer-events: none;'") }>Hiring Manager Interview</a>
+                            </li>
+
+                        </ol>
+                        <span class="filling-line bg-blue" aria-hidden="true"></span>
+                    </div>
+                    <!-- .events -->
+                </div>
+                <!-- .events-wrapper -->
+                <ul class="cd-timeline-navigation mt-ht-nav-icon">
+                    <li>
+                        <a href="#0" class="prev inactive btn blue md-skip">
+                            <i class="fa fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#0" class="next btn blue md-skip">
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- .cd-timeline-navigation -->
+            </div>
+            <!-- .timeline -->
+            <div class="events-content">
+                <ol>
+                    @if (Model.FormResponse != null)
+                    {
+                    <li class="selected" data-date="16/01/2014">
+                        <div class="mt-title">
+                            <h2 class="mt-content-title">Application Form</h2>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="mt-content border-grey-steel">
+                            <p><strong>Application Form Submission Date:</strong> @(Model.FormResponse.SubmissionDate?.ToString("dd/MM/yyyy") ?? "")</p>
+                            <p><strong>Application Form Status:</strong> @(Model.FormResponse.Status)</p>
+                            <a href="@Url.Action("ApplicantResponse", "ApplicationForm", new { applicantId = Model.Id })" class="btn btn-circle dark btn-outline">View Details</a>
+                        </div>
+                    </li>
+                    }
+
+                    @if (Model.PhoneInterview != null)
+                    {
+                    <li data-date="12/03/2014">
+                        <div class="mt-title">
+                            <h2 class="mt-content-title">Phone Interview</h2>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="mt-content border-grey-steel">
+                            <p><strong>Phone Interview Submission Date:</strong> @(Model.PhoneInterview.SubmissionDate?.ToString("dd/MM/yyyy") ?? "")</p>
+                            <p><strong>Phone Interview Status:</strong> @(Model.PhoneInterview.Status)</p>
+                            <p><strong>Phone Interview Feedback:</strong> @(Model.PhoneInterview.Feedback)</p>
+                            <a href="@Url.Action("Details", "PhoneInterview", new { applicantId = Model.Id })" class="btn btn-circle dark btn-outline">Details</a>
+                        </div>
+                    </li>
+                    }
+
+                    @if (hrInterview != null)
+                    {
+                    <li data-date="27/04/2014">
+                        <div class="mt-title">
+                            <h2 class="mt-content-title">HR Interview</h2>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="mt-content border-grey-steel">
+                            <p><strong>HR Interview Date:</strong> @(hrInterview.InterviewDate.ToString("dd/MM/yyyy"))</p>
+                            @if (hrInterview.Feedback == null)
+                                {
+                                <p>There is no Feedback Submitted.</p>
+                                }
+                                else
+                                {
+                                <p><strong>Passed:</strong> @(hrInterview.Feedback.Hired ? "Yes" : "No") </p>
+                                }
+                            <a href="@Url.Action("Details", "Interviews", new { applicantId = Model.Id, InterviewType = InterviewType.HR })" class="btn btn-circle dark btn-outline">View Details</a>
+                        </div>
+                    </li>
+                    }
+
+                    @if (technicalInterview != null)
+                    {
+                    <li data-date="20/05/2014">
+                        <div class="mt-title">
+                            <h2 class="mt-content-title">HR Interview</h2>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="mt-content border-grey-steel">
+                            <p><strong>Tehnical Interview Date:</strong> @(technicalInterview.InterviewDate.ToString("dd/MM/yyyy"))</p>
+                            @if (technicalInterview.Feedback == null)
+                                {
+                                <p>There is no Feedback Submitted.</p>
+                                }
+                                else
+                                {
+                                <p><strong>Passed:</strong> @(technicalInterview.Feedback.Hired ? "Yes" : "No") </p>
+                                }
+                            <a href="@Url.Action("Details", "Interviews", new { applicantId = Model.Id, InterviewType = InterviewType.Technical })" class="btn btn-circle dark btn-outline">View Details</a>
+                        </div>
+                    </li>
+                    }
+
+                    @if (hiringManagerInterview != null)
+                    {
+                    <li data-date="01/07/2014">
+                        <div class="mt-title">
+                            <h2 class="mt-content-title">HR Interview</h2>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="mt-content border-grey-steel">
+                            <p><strong>Hiring Manager Interview Date:</strong> @(hiringManagerInterview.InterviewDate.ToString("dd/MM/yyyy"))</p>
+                            @if (hiringManagerInterview.Feedback == null)
+                                {
+                                <p>There is no Feedback Submitted.</p>
+                                }
+                                else
+                                {
+                                <p><strong>Passed:</strong> @(hiringManagerInterview.Feedback.Hired ? "Yes" : "No") </p>
+                                }
+                            <a href="@Url.Action("Details", "Interviews", new { applicantId = Model.Id, InterviewType = InterviewType.HiringManager })" class="btn btn-circle dark btn-outline">View Details</a>
+                        </div>
+                    </li>
+                    }
+                </ol>
+            </div>
+            <!-- .events-content -->
+        </div>
+    </div>
+</div>
+
+@section plugins
+{
+    <script src="~/assets/global/plugins/horizontal-timeline/horizontal-timeline.js" type="text/javascript"></script>
+}
+
+@section scripts
+{
+    <script src="~/assets/global/scripts/app.min.js" type="text/javascript"></script>
+}

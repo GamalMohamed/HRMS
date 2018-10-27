@@ -1,0 +1,124 @@
+﻿@using HR_Staffing.Models
+@model HR_Staffing.Models.Interview
+
+@{
+    ViewBag.Title = "Interview Details";
+}
+
+<h2 class="page-title">
+    <i class="fa fa-info"></i>
+    Interview Details
+</h2>
+
+<div class="portlet-body">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <tbody>
+                    <tr>
+                        <td style="width:30%">@Html.Label("Applicant Name", htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Applicant.Name)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.InterviewDate, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.InterviewDate)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @(Model.StartTime?.ToString("hh:mm tt") ?? "")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @(Model.EndTime?.ToString("hh:mm tt") ?? "")
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.Staffing)
+{
+    <p>
+        <a href="@Url.Action("Edit", "Interviews", new {id = Model.Id}, null)" class="btn btn-outline btn-circle green btn-sm purple">
+            <i class="fa fa-edit"></i> Edit
+        </a>
+    </p>
+}
+
+<hr />
+
+<h2>Feedback Details</h2>
+
+@if (Model.Feedback == null)
+{
+    <p>There is no feedback to this interview yet.</p>
+    if ((ViewBag.Staffing && Model.InterviewType == InterviewType.HR) || Model.InterviewType != InterviewType.HR)
+    {
+        <p>
+            <a href="@Url.Action("Feedback", "Interviews", new {id = Model.Id}, null)" class="btn btn-primary">
+                Add Feedback
+            </a>
+        </p>
+    }
+}
+else
+{
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                        <tr>
+                            <td style="width:30%">@Html.LabelFor(model => model.Feedback.Interviewer, htmlAttributes: new { @class = "bold" })</td>
+                            <td style="width:70%">
+                                @Html.DisplayFor(model => model.Feedback.Interviewer)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%">@Html.LabelFor(model => model.Feedback.InterviewerAlias, htmlAttributes: new { @class = "bold" })</td>
+                            <td style="width:70%">
+                                @Html.DisplayFor(model => model.Feedback.InterviewerAlias)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%">@Html.LabelFor(model => model.Feedback.SubmissionDate, htmlAttributes: new { @class = "bold" })</td>
+                            <td style="width:70%">
+                                @Html.DisplayFor(model => model.Feedback.SubmissionDate)
+                            </td>
+                        </tr>
+                        @foreach (var feedbackContent in Model.Feedback.FeedbackContents)
+                        {
+                            <tr>
+                                <td>@Html.Label(feedbackContent.Title, htmlAttributes: new { @class = "bold" })</td>
+                                <td>@feedbackContent.QuestionAnswer</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>@Html.Label("Passed", htmlAttributes: new { @class = "bold" })</td>
+                            <td>@(Model.Feedback.Hired ? "Yes" : "No")</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+}
+
+<p>
+    <a href="@Url.Action("Index", "Applicants")" class="btn btn-primary">
+        Back to List
+    </a>
+</p>

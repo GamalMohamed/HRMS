@@ -1,0 +1,53 @@
+﻿@using HR_Staffing.Models
+@model Applicant
+@{
+    if (Model.Id == 0)
+    {
+        ViewBag.Title = "New Applicant";
+    }
+    else
+    {
+        ViewBag.Title = "Edit";
+    }
+}
+
+<div class="portlet light bordered">
+    @using (Html.BeginForm("Save", "Applicants"))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label bold" })
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Role, htmlAttributes: new { @class = "control-label bold" })
+            @Html.TextBoxFor(m => m.Role, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.HiringManager, htmlAttributes: new { @class = "control-label bold" })
+            @Html.DropDownListFor(model => model.HiringManager, ViewBag.HiringManagers as SelectList, "-Choose-", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.HiringManager, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label bold" })
+            @Html.DropDownListFor(model => model.Status, EnumHelper.GetSelectList(typeof(ApplicantStatus)), "-Choose-", new { @class = "postfix form-control" })
+            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Comments, htmlAttributes: new { @class = "control-label bold" })
+            @Html.TextAreaFor(m => m.Comments, 5, 1, new { @class = "form-control", @style = "width: 80%; max-width: 100%;" })
+            @Html.ValidationMessageFor(m => m.Comments, "", new { @class = "text-danger" })
+        </div>
+        @Html.HiddenFor(m => m.Id)
+        <button type="submit" class="btn btn-primary">Save</button>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

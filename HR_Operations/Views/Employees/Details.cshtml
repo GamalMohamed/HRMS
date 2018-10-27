@@ -1,0 +1,187 @@
+﻿@using CoEX_HRMS.Models
+@model Employee
+@{
+    ViewBag.Title = "Employee Details";
+}
+<h1 class="page-title">
+    <i class="fa fa-info"></i>
+    Details
+</h1>
+<hr />
+<div class="portlet-body">
+    <div class="row">
+        <div class="col-md-12">
+            <table id="user" class="table table-bordered table-striped">
+                <tbody>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Name)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "bold" }) </td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Email)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.PhoneNumber)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Gender)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width: 70%">
+                            @if (Model.BirthDate.HasValue)
+                            {
+                                @Model.BirthDate.Value.ToShortDateString()
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.MajorUniversity, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.MajorUniversity)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.GraduationYear, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.GraduationYear)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.HiringDate, htmlAttributes: new { @class = "bold" })
+                        <td style="width:70%">
+                            @if (Model.HiringDate.HasValue)
+                            {
+                                @Model.HiringDate.Value.ToShortDateString()
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.ExperienceYears, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.ExperienceYears)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.PreviousEmployer, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.PreviousEmployer)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.Vendor, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Vendor)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.AccessLevel, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.AccessLevel)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.Workload, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Workload.Name)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Role.Title)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.BasedOut, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.BasedOut)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.Subsidiary, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Subsidiary)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.ReportingManager, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.ReportingManager)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Status)
+                        </td>
+                    </tr>
+
+                    @if (Model.Status == Status.Resigned)
+                    {
+                        <tr>
+                            <td style="width:30%">@Html.LabelFor(model => model.Attrition, htmlAttributes: new { @class = "bold" })</td>
+                            <td style="width:70%">
+                                @Html.DisplayFor(model => model.Attrition)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%">@Html.LabelFor(model => model.ResignationDate, htmlAttributes: new { @class = "bold" })</td>
+                            <td style="width:70%">
+                                @if (Model.ResignationDate.HasValue)
+                                {
+                                    @Model.ResignationDate.Value.ToShortDateString()
+                                }
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%">@Html.LabelFor(model => model.Movement, htmlAttributes: new { @class = "bold" })</td>
+                            <td style="width:70%">
+                                @Html.DisplayFor(model => model.Movement)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%">@Html.LabelFor(model => model.ResignationStatus, htmlAttributes: new { @class = "bold" })</td>
+                            <td style="width:70%">
+                                @Html.DisplayFor(model => model.ResignationStatus)
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<p>
+    @if (ViewBag.Access == "FullAccess")
+    {
+        <div class="col-md-offset-9">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn blue-chambray" })
+        </div>
+    }
+
+    @if (Model.Status == Status.Resigned)
+    {
+        @Html.ActionLink("Back to List", "Resigned");
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "Index");
+    }
+
+</p>

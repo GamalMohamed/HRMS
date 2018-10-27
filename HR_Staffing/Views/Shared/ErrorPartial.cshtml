@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Error";
+}
+
+<h1 class="page-title bold">
+    <i class="fa fa-times-circle"></i>
+    Error
+</h1>
+
+<h4> @ViewBag.ErrorMsg </h4>
+<br/>
+<button onclick="goBack()" class="btn btn-primary">Go Back</button>
+
+<script>
+        function goBack() {
+            window.history.back();
+        }
+</script>

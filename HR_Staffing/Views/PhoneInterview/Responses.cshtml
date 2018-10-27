@@ -1,0 +1,45 @@
+﻿@model IEnumerable<HR_Staffing.Models.PhoneInterview>
+@{
+    ViewBag.Title = "Responses";
+}
+
+<!-- BEGIN SAMPLE TABLE PORTLET-->
+@if (!Model.Any())
+{
+    <p>There is no responses yet.</p>
+}
+else
+{
+    <div class="portlet">
+        <div class="portlet-body">
+            <div class="table-scrollable">
+                <table class="table table-striped table-bordered table-advance table-hover">
+                    <thead>
+                        <tr>
+                            <th>Applicant</th>
+                            <th>Submisson Date</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var phoneInterview in Model)
+                        {
+                            <tr>
+                                <td>@phoneInterview.Applicant.Name</td>
+                                <td>@phoneInterview.SubmissionDate</td>
+                                <td>@phoneInterview.Status</td>
+                                <td>
+                                    <a href="@Url.Action("Details", new { applicantId = phoneInterview.ApplicantId })" class="btn dark btn-sm btn-outline sbold uppercase">
+                                        <i class="fa fa-share"></i> View
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+<!-- END SAMPLE TABLE PORTLET-->

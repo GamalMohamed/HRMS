@@ -1,0 +1,45 @@
+﻿@model HR_Staffing.Models.PhoneInterview
+@{
+    ViewBag.Title = "Phone Interview Details";
+}
+
+<h1 class="page-title">
+    <i class="fa fa-info"></i>
+    Details
+</h1>
+
+<div class="portlet-body">
+    <div class="row">
+        <div class="col-md-12">
+            <table id="user" class="table table-bordered table-striped">
+                <tbody>
+                    <tr>
+                        <td style="width:30%">@Html.Label("Applicant", htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Applicant.Name)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.Label("Submission Date", htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.SubmissionDate)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.Label("Feedback", htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Feedback)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.Label("Status", htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Status)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

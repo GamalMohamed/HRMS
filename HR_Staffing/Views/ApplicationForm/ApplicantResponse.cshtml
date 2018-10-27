@@ -1,0 +1,68 @@
+﻿@model HR_Staffing.Models.FormResponse
+@{
+    ViewBag.Title = "Response Details";
+}
+
+<div class="portlet-body">
+    <div class="row">
+        <div class="col-md-12">
+            <table id="user" class="table table-bordered table-striped">
+                <tbody>
+                    <tr>
+                        <td style="width:30%">@Html.Label("Submission Date", htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.SubmissionDate)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.Label("Name", htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.ApplicantName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.Label("Email", htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.ApplicantEmail)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.Label("Phone Number", htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.ApplicantPhoneNumber)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.Label("Resume", htmlAttributes: new { @class = "bold" })</td>
+                        <td style="width:70%">
+                            <a href="@Model.ApplicantResume" download>
+                                <i class="fa fa-download"></i> Download
+                            </a>
+                        </td>
+                    </tr>
+                    @foreach (var formResponseContent in Model.FormResponseContents)
+                    {
+                        <tr>
+                            <td style="width:30%">@Html.Label(formResponseContent.ApplicantQuestion.Title, htmlAttributes: new { @class = "bold" })</td>
+                            <td style="width:30%">@formResponseContent.QuestionAnswer</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if (ViewBag.Staffing)
+            {
+                using (Html.BeginForm("EditResponseStatus", "ApplicationForm"))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.ApplicantId, new { Value = Model.ApplicantId })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Status, htmlAttributes: new { @class = "bold" })
+                        @Html.EnumDropDownListFor(m => m.Status, new { @class = "form-control" })
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Edit Response Status</button>
+                }
+            }
+        </div>
+    </div>
+</div>

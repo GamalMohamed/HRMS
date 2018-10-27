@@ -1,0 +1,61 @@
+{
+  "name": "multi-download",
+  "version": "2.0.1",
+  "description": "Download multiple files at once",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sindresorhus/multi-download.git"
+  },
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "sindresorhus.com"
+  },
+  "scripts": {
+    "build": "a=$npm_package_name; browserify -r ./index:$a -s $a index.js -o browser.js"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "browser",
+    "download",
+    "multiple",
+    "parallel",
+    "files"
+  ],
+  "devDependencies": {
+    "browserify": "^14.3.0"
+  },
+  "gitHead": "af749d945646b8d737d5af587a60cb43c1640cb8",
+  "bugs": {
+    "url": "https://github.com/sindresorhus/multi-download/issues"
+  },
+  "homepage": "https://github.com/sindresorhus/multi-download#readme",
+  "_id": "multi-download@2.0.1",
+  "_shasum": "2cd686f776b7acff487cb13b0d5b5f6de143f234",
+  "_from": "multi-download@latest",
+  "_npmVersion": "4.2.0",
+  "_nodeVersion": "7.9.0",
+  "_npmUser": {
+    "name": "sindresorhus",
+    "email": "sindresorhus@gmail.com"
+  },
+  "dist": {
+    "shasum": "2cd686f776b7acff487cb13b0d5b5f6de143f234",
+    "tarball": "https://registry.npmjs.org/multi-download/-/multi-download-2.0.1.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "sindresorhus",
+      "email": "sindresorhus@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/multi-download-2.0.1.tgz_1494059686903_0.2294167848303914"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/multi-download/-/multi-download-2.0.1.tgz"
+}

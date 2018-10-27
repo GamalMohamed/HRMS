@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Import Employees";
+}
+
+<h2 class="page-title font-blue bold uppercase">
+    <i class="fa fa-upload"></i>
+    Upload CSV file
+</h2>
+
+<div>
+    @using (Html.BeginForm("ImportEmployees", "Employees", FormMethod.Post, new
+    {
+        enctype = "multipart/form-data", onsubmit = "return CheckFileType()"
+    }))
+    {
+        <br />
+        <input id="uploadFile" name="uploadFile" type="file" />
+        <br />
+        <button type="submit" value="Import File" class="btn btn-primary mt-ladda-btn ladda-button" data-style="expand-right">
+            <span class="ladda-label">Import File</span>
+            <span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
+        </button>
+    }
+</div>
+
+@section styles{
+    <link href="~/assets/global/plugins/ladda/ladda-themeless.min.css" rel="stylesheet" type="text/css" />
+}
+@section plugins{
+    @Scripts.Render("~/bundles/spinner-button-plugins")
+}
+@section scripts{
+    <script src="~/assets/pages/scripts/ui-buttons-spinners.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        function CheckFileType() {
+            var fileName = document.getElementById("uploadFile").value;
+            if (fileName === "") {
+                alert("Browse to upload a valid File with CSV extension");
+                Ladda.stopAll();
+                return false;
+            }
+            var ext;
+            if (window.navigator.userAgent.indexOf("Edge") > -1) {
+                ext = fileName.split(".")[2].toUpperCase();
+            } else {
+                ext = fileName.split(".")[1].toUpperCase();
+            }
+            if (ext === "CSV")
+                return true;
+            else {
+                alert("File with " + fileName.split(".")[1].toUpperCase() + " extension is invalid. Upload a valid file with CSV extension");
+                Ladda.stopAll();
+                return false;
+            }
+        }
+    </script>
+}
+
+
+

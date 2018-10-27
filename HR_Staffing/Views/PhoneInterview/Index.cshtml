@@ -1,0 +1,150 @@
+﻿@model HR_Staffing.ViewModels.PhoneInterviewViewModel
+@{
+    ViewBag.Title = "New Phone Interview";
+}
+
+@{int i = 1; int cnt = 0; }
+
+<div class="portlet">
+    <div class="row form-group">
+        <div class="col-xs-12">
+            <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+
+                <li class="active">
+                    <a href="#step-@i">
+                        <h4 class="list-group-item-heading">Initial</h4>
+                    </a>
+                </li>
+                @{i++;}
+
+                @for (cnt = 1; cnt <= Model.FormQuestions.Count; cnt++)
+                {
+                    <li class="disabled"}>
+                        <a href="#step-@i">
+                            <h4 class="list-group-item-heading"> Q @cnt</h4>
+                        </a>
+                    </li>
+                    {i++;}
+                }
+
+                <li class="disabled">
+                    <a href="#step-@i">
+                        <h4 class="list-group-item-heading">Final</h4>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function activate_step(index) {
+            if (index == 1) {
+                $("#PhoneInterview_startTime").attr("value", new Date().getTime());
+                //alert($("#PhoneInterview_startTime").attr("value"));
+            }
+            $('ul.setup-panel li:eq(' + (index) + ')').removeClass('disabled');
+            $('ul.setup-panel li a[href="#step-' + (index + 1) + '"]').trigger('click');
+            $(this).remove();
+        }
+    </script>
+
+    @{i = 1; }
+
+    <div class="row setup-content" id="step-@i">
+        <div class="col-xs-12">
+            <div class="col-md-12 well text-center">
+                <h1> Welcome </h1>
+                <p>Start the Phone Interview</p>
+
+                <button id="activate-step-@(i + 1)" onclick="activate_step(@i)" class="btn btn-primary btn-md">Start</button>
+            </div>
+        </div>
+    </div>
+
+    @{i++; }
+
+
+    @{cnt = 1; }
+    @foreach (var formQuestion in Model.FormQuestions)
+    {
+        <div class="row setup-content" id="step-@i">
+            <div class="col-xs-12">
+                <div class="col-md-12 well text-center">
+                    <h1> @formQuestion.Title </h1>
+
+                    <p>
+                        @formQuestion.Description
+                    </p>
+
+                    @if (cnt != Model.FormQuestions.Count)
+                    {<button id="activate-step-@(i + 1)" onclick="activate_step(@i)" class="btn btn-primary btn-md" name="astep">Go to Question @(cnt + 1)</button>}
+                    else
+                    {<button id="activate-step-@(i + 1)" onclick="activate_step(@i)" class="btn btn-primary btn-md" name="astep">Finish</button> }
+               
+                </div>
+            </div>
+        </div>
+        { i++; cnt++; }
+    }
+
+    @using (Html.BeginForm("Save", "PhoneInterview"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row setup-content" id="step-@i">
+            <div class="col-xs-12">
+                <div class="col-md-12 well text-center">
+                    <h1> Interview Finished! </h1>
+
+                    <button type="submit" class="btn btn-primary btn-md">Submit Feedback</button>
+                </div>
+            </div>
+        </div>
+
+        <h3>Applicant: @ViewBag.ApplicantName</h3>
+
+        <div class="form-group">
+            <h3>@Html.LabelFor(m => m.PhoneInterview.Feedback)</h3>
+            @Html.TextAreaFor(m => m.PhoneInterview.Feedback, new { @class = "form-control", @rows = 5, @style = "width: 100%; max-width: 100%;" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.PhoneInterview.Status)
+            @Html.EnumDropDownListFor(m => m.PhoneInterview.Status, new { @class = "form-control" })
+        </div>
+
+        @Html.HiddenFor(m => m.PhoneInterview.ApplicantId, new { Value = Model.PhoneInterview.ApplicantId })
+    }
+
+</div>
+
+@section scripts
+{
+    <script>
+        // Activate Next Step
+
+        $(document).ready(function () {
+
+            var navListItems = $('ul.setup-panel li a'),
+                allWells = $('.setup-content');
+
+            allWells.hide();
+
+            navListItems.click(function (e) {
+                e.preventDefault();
+                var $target = $($(this).attr('href')),
+                    $item = $(this).closest('li');
+
+                if (!$item.hasClass('disabled')) {
+                    navListItems.closest('li').removeClass('active');
+                    $item.addClass('active');
+                    allWells.hide();
+                    $target.show();
+                }
+            });
+
+            $('ul.setup-panel li.active a').trigger('click');
+        });
+    </script>
+}

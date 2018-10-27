@@ -1,0 +1,35 @@
+﻿@model CoEX_HRMS.Models.Workload
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="portlet-body">
+    <div class="row">
+        <div class="col-md-12">
+            <table id="user" class="table table-bordered table-striped">
+                <tbody>
+                <tr>
+                    <td style="width:20%">@Html.LabelFor(model => model.Name, new { @class = "bold" })</td>
+                    <td style="width:80%">@Html.DisplayFor(model => model.Name)</td>
+                </tr>
+                <tr>
+                    <td style="width:20%">@Html.LabelFor(model => model.EmployeesCount, new { @class = "bold" })</td>
+                    <td style="width:80%">@Html.DisplayFor(model => model.EmployeesCount)</td>
+                </tr>
+                    
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<p>
+    <div class="col-md-offset-9">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn blue-chambray" })
+    </div>
+    @Html.ActionLink("Back to List", "Index")
+</p>
